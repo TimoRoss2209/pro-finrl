@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pro-finrl"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "U.N. Owen", email = "void@some.where" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "pandas",
+  "numpy",
+  "datetime",
+  "yfinance",
+  "pyarrow",
+  "scipy",
+  "matplotlib",
+  "gymnasium",
+  "stable-baselines3",
+  "stockstats",
+  "tensorboard",
+  "requests"
+]
+
+[project.urls]
+Documentation = "https://github.com/U.N. Owen/pro-finrl#readme"
+Issues = "https://github.com/U.N. Owen/pro-finrl/issues"
+Source = "https://github.com/U.N. Owen/pro-finrl"
+
+[tool.hatch.version]
+path = "src/pro_finrl/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.default]
+python = "3.13.15"
+
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/pro_finrl tests}"
+
+[tool.coverage.run]
+source_pkgs = ["pro_finrl", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/pro_finrl/__about__.py",
+]
+
+[tool.coverage.paths]
+pro_finrl = ["src/pro_finrl", "*/pro-finrl/src/pro_finrl"]
+tests = ["tests", "*/pro-finrl/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
